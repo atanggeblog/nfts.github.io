@@ -8,8 +8,8 @@
 @Desc   ：
 =================================================='''
 import png
-from Image_subject import canvas, man, woman, mouse, cattle  # 导入画布和人物模型
-from Image_stickers import cigarette, hairman, hairwoman  # 导入需要的贴纸
+from Image_subject import canvas, man, woman, mouse, cattle
+from Image_stickers import cigarette, hairman, hairwoman
 import random
 from Get_color_data import get_color_data
 def randomcolor():
