@@ -14,7 +14,7 @@ import numpy as np
 from Box_method import box_method
 from RGB_to_Hex import rgb_to_hex
 f = open("colordistance.csv","a+",newline="",encoding="utf-8-sig")
-colordata = get_main_colors('C:\\Users\\Philip\\PythonNotebook\\find-images\\data\\monet\\')
+colordata = get_main_colors('这里填入你的训练集文件夹路径例如：C:\\你的电脑路径\\data\\monet\\')
 writer = csv.writer(f)
 black_rbg = [0,0,0]
 colordata_disrance = []

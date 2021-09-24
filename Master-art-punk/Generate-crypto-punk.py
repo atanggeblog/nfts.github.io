@@ -19,9 +19,6 @@ def randomcolor():
         color += colorArr[random.randint(0,14)]
     return color
 def merge(sticker0, sticker1):
-    '''
-    将 sticker1 合并到 sticker0
-    '''
     colors = sticker0['colors']
     index = {}
     for i,color in enumerate(sticker1['colors']):
@@ -40,10 +37,6 @@ def merge(sticker0, sticker1):
 
 
 def merges(stickers):
-    '''
-    从sticker0 sticker1 开始递归合并贴纸
-    '''
-
     if len(stickers) >= 2:
         sticker = merge(stickers.pop(0), stickers.pop(0))
         stickers.insert(0, sticker)
@@ -53,10 +46,6 @@ def merges(stickers):
 
 
 def generate(image, name):
-    '''
-    根据点阵图，生成 png 图片
-    name: 生成的图片名称
-    '''
     #colors = image['colors'][1:]
     palette = [(255, 255, 255,0)]
     #colors = ['000000'] + [randomcolor() for i in range(0,8)]
@@ -73,11 +62,7 @@ def generate(image, name):
 
 
 if __name__ == '__main__':
-    # canvas, man 是必须的，后面跟多个 sticker
-    # 如：[canvas, man, mouse, cattle]
-    stickers = [canvas,mouse]
-    # image = merges(stickers)
-    # generate(image, 'cattle')
-    for i in range(0,100):
+    stickers = [canvas,mouse] #设置模组已经内置mouse和cattle
+    for i in range(0,100):  #设置生成数量
         image = merges(stickers)
         generate(image, 'monet-output/monet-cattle' + str(i))
