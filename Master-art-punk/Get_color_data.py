@@ -10,7 +10,6 @@
 import csv
 from Box_method import box_method
 from RGB_to_Hex import rgb_to_hex
-import numpy as np
 def get_color_data():
     f = open("colordistance.csv", "r+", encoding="utf-8-sig")
     reader = csv.reader(f)

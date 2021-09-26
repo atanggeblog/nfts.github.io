@@ -9,13 +9,7 @@
 =================================================='''
 import PIL
 import cv2
-import numpy as np
 from matplotlib import image
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import numpy as np
-from IPython.display import Image
-from IPython.display import display
 from KMeans_parameter import k,init,random_state
 from sklearn.cluster import KMeans
 from os import listdir
