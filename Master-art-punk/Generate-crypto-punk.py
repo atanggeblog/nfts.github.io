@@ -48,8 +48,8 @@ def merges(stickers):
 def generate(image, name):
     #colors = image['colors'][1:]
     palette = [(255, 255, 255,0)]
-    #colors = ['000000'] + [randomcolor() for i in range(0,8)]
-    colors = ['000000'] + get_color_data()
+    #colors = ['000000'] + [randomcolor() for i in range(0,8)] #随机颜色
+    colors = ['000000'] + get_color_data() #艺术家风格
     print(colors)
     for color in colors:
         color = [int(c, 16) for c in (color[:2], color[2:4], color[4:])]
@@ -62,7 +62,7 @@ def generate(image, name):
 
 
 if __name__ == '__main__':
-    stickers = [canvas,mouse] #设置模组已经内置mouse和cattle
-    for i in range(0,100):  #设置生成数量
+    stickers = [canvas,cattle] #设置模组已经内置mouse和cattle
+    for i in range(0,30):  #设置生成数量
         image = merges(stickers)
-        generate(image, 'monet-output/monet-cattle' + str(i))
+        generate(image, 'cattle-output/cattle' + str(i))
