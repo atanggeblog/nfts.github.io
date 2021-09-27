@@ -1,5 +1,5 @@
 # Master-art-punk
-##### Make your master artistic punk avatar through machine learning world famous paintings
+##### Make your master artistic punk avatar through machine learning world famous paintings.
 ##### 通过机器学习世界名画制作属于你的大师级艺术朋克头像
 ##### Nowadays, NFT is becoming popular in the world, and various trading platforms like opensea have developed rapidly, and cryptopunks have even sold tens of millions of dollars.
 ##### 如今，NFT在世界上正流行起来，各种交易平台像opensea等，快速发展了起来，像cryptopunks甚至卖出了上千万美金。

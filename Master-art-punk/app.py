@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+"""=================================================
+@Author ：蒋虎成
+@Date   ：2021/9/22 17:04
+@Desc   ：主接口
+=================================================="""
 from colors import merges, generate
 from imageData.subject import canvas, cattle
 
