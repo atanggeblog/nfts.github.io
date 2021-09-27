@@ -7,9 +7,10 @@
 =================================================="""
 from colors import ColorMultiImage
 from imageData.subject import canvas, cattle
+import settings
 if __name__ == '__main__':
     generate_color = ColorMultiImage()
     stickers = [canvas, cattle]  # 设置模组已经内置mouse和cattle
-    for amount in range(0, 10):  # 设置生成数量
+    for amount in range(0, settings.n):  # 设置生成数量
         pixel = generate_color.merges(stickers)
-        generate_color.generate(pixel, 'cattle-output/cattle' + str(amount))
+        generate_color.generate(pixel, settings.color_output_filepath+ str(amount))
