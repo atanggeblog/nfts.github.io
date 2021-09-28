@@ -121,7 +121,7 @@ class ColorMultiImage(object):
         if coloring_style == 1:
             colors = ['000000'] + self.get_color_data(color_distance_filepath,colors_number)  # 艺术家风格
         if coloring_style == 2:
-            colors = ['000000'] + image_data['colors'][1:]
+            colors = ['000000'] + image_data['colors'][1:] # 固定风格
         for color in colors:
             color = [int(c, 16) for c in (color[:2], color[2:4], color[4:])]
             palette.append(tuple(color))

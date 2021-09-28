@@ -11,7 +11,7 @@ from model import training
 if __name__ == '__main__':
     generate_color = ColorMultiImage()
     stickers = settings.module  # 设置模组已经内置mouse和cattle
-    #color_model_path = training(settings.color_data_path)
+    color_model_path = training(settings.color_data_path)
     #print(color_model_path)
     for amount in range(0, settings.n):  # 设置生成数量
         pixel = generate_color.merges(stickers)
