@@ -16,17 +16,17 @@ from matplotlib import image
 from sklearn.cluster import KMeans
 from os import listdir
 import png
-from imageData.subject import canvas
-
+from function.subject import canvas
+import os
 class ColorMultiImage(object):
-    def __init__(self,k = 30,init_method = 'random',random_state = 88,box_number = 8):
+    def __init__(self,k = 30,init_method = 'random',random_state = 88):
         self.k = k
         self.init_method = init_method
         self.random_state = random_state
-        self.box_number = box_number
-    def box_method(self,color_data, group_distance):
+        self.color_number = 0
+    def box_method(self,color_data, group_distance,colors_number):
         color_data_random_box = []
-        for i in range(0, self.box_number):
+        for i in range(0, colors_number):
             color_data_random_box.append(
                 color_data[(len(color_data) - 1) - (i * group_distance + random.randint(0, group_distance - 1))])
         return color_data_random_box
@@ -67,11 +67,11 @@ class ColorMultiImage(object):
             print("完成" + filename + "提取!")
         return colors_all_out
 
-    def get_color_data(self):
-        f = open(settings.color_distance_filepath, "r+", encoding="utf-8-sig")
+    def get_color_data(self,color_distance_filepath,colors_number):
+        f = open(color_distance_filepath, "r+", encoding="utf-8-sig")
         reader = csv.reader(f)
         color_data_sort = list(reader)
-        box = self.box_method(color_data_sort, len(color_data_sort) // self.box_number)
+        box = self.box_method(color_data_sort, len(color_data_sort) // colors_number,colors_number)
         return [self.rgb_to_hex(i[:3]) for i in box]
 
     def colour_distance(self,rgb_1, rgb_2):
@@ -97,10 +97,9 @@ class ColorMultiImage(object):
             if color not in colors:
                 colors.append(color)
                 index[i] = colors.index(color)
-                print(colors.index(color))
+                self.colors_number = colors.index(color)
             else:
                 index[i] = colors.index(color)
-
         for i, row in enumerate(sticker1['data']):
             for j, color in enumerate(row):
                 if color > 0:
@@ -115,17 +114,22 @@ class ColorMultiImage(object):
             return stickers[0]
         return self.merges(stickers)
 
-    def generate(self,image_data, name):
-        # colors = image['colors'][1:]
-        palette = [(255, 255, 255, 0)]
-        # colors = ['000000'] + [random_colors() for i in range(0,8)] #随机颜色
-        colors = ['000000'] + self.get_color_data()  # 艺术家风格
-        # print(colors)
+    def generate(self,image_data, name,number,color_distance_filepath,coloring_style,colors_number):
+        palette = [(255, 255, 255,0)]
+        if coloring_style == 0:
+            colors = ['000000'] + [self.random_colors() for i in range(0,colors_number)] #随机颜色
+        if coloring_style == 1:
+            colors = ['000000'] + self.get_color_data(color_distance_filepath,colors_number)  # 艺术家风格
+        if coloring_style == 2:
+            colors = ['000000'] + image_data['colors'][1:]
         for color in colors:
             color = [int(c, 16) for c in (color[:2], color[2:4], color[4:])]
             palette.append(tuple(color))
-            # print(palette)
+            print(palette)
         pixel_picture_file = png.Writer(len(canvas['data'][0]), len(
             canvas['data']), palette=palette, bitdepth=4)
-        pixel_picture = open(f'output/{name}.png', 'wb')
+        dirs = os.getcwd() + "\\output\\" + str(name) + "-output\\"
+        if not os.path.exists(dirs):
+            os.makedirs(dirs)
+        pixel_picture = open(dirs + name + number + ".png", 'wb')
         pixel_picture_file.write(pixel_picture, image_data['data'])

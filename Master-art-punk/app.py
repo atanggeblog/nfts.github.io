@@ -6,11 +6,14 @@
 @Desc   ：主接口
 =================================================="""
 from colors import ColorMultiImage
-from imageData.subject import canvas, cattle
 import settings
+from model import training
 if __name__ == '__main__':
     generate_color = ColorMultiImage()
-    stickers = [canvas, cattle]  # 设置模组已经内置mouse和cattle
+    stickers = settings.module  # 设置模组已经内置mouse和cattle
+    #color_model_path = training(settings.color_data_path)
+    #print(color_model_path)
     for amount in range(0, settings.n):  # 设置生成数量
         pixel = generate_color.merges(stickers)
-        generate_color.generate(pixel, settings.color_output_filepath+ str(amount))
+        colors_number = generate_color.colors_number
+        generate_color.generate(pixel, settings.color_output_name,str(amount),settings.color_model_path,settings.color_style,colors_number)
