@@ -13,11 +13,14 @@
 ![NFT1](https://raw.fastgit.org/philipjhc/Master-art-punk/main/Master-art-punk/cover_photo/NFT4.png)
 ## 使用说明：
 ### 1.安装要求：
-#### 1.更改settings.py的第8行，填入你自己的图片训练集路径，例如，打开./data/monet看到图片类似。（类似方法制作数据集，默认png格式）
+#### 1.更改settings.py参数路径
 #### 2.安装numpy和pypng:pip install numpy / pip install pypng
 ### 2.训练：
-#### 1.python model.py / 运行 model.py （等待时间跟图片数目有关）
-#### 2.运行后，可发现colordistance.csv更新（需修改名字在setting.py的color_distance_filepath修改）
-#### 3.接着打开app.py 第12行选择模组类型（内置模型可在imageData下的stickers.py，subject.py中查看），第10行设置生成数量，第68行设置输出文件路径。
-#### 4.app.py
-#### 5.output对应文件夹下中有已生成的朋克头像。（最好选择一个作家的风格，例如，我选择了莫奈）
+#### 1.将setting.py改为train = True
+#### 2.python app.py
+#### 3.运行后，会输出对应模型路径./output/csv/XXXXXXXXXX.csv
+### 3.生成
+#### 1.将setting.py改为train = False
+#### 2.将setting.py中color_model_path修改为对应路径
+#### 3.python app.py
+#### 4../output/中查看生成图像

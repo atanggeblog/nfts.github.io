@@ -10,7 +10,7 @@ import csv
 import cv2
 import math
 import random
-import settings
+from PIL import Image
 import numpy as np
 from matplotlib import image
 from sklearn.cluster import KMeans
@@ -125,7 +125,6 @@ class ColorMultiImage(object):
         for color in colors:
             color = [int(c, 16) for c in (color[:2], color[2:4], color[4:])]
             palette.append(tuple(color))
-            print(palette)
         pixel_picture_file = png.Writer(len(canvas['data'][0]), len(
             canvas['data']), palette=palette, bitdepth=4)
         dirs = os.getcwd() + "\\output\\" + str(name) + "-output\\"
@@ -133,3 +132,7 @@ class ColorMultiImage(object):
             os.makedirs(dirs)
         pixel_picture = open(dirs + name + number + ".png", 'wb')
         pixel_picture_file.write(pixel_picture, image_data['data'])
+        pixel_picture.close()
+        image = Image.open(dirs + name + number + ".png")
+        img_resize = image.resize((2500,2500),PIL.Image.NEAREST)
+        img_resize.save(dirs + name + number + ".png")

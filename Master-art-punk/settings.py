@@ -12,11 +12,12 @@ DATACENTER_ID = 0
 WORKER_ID = 0
 SEQUENCE = 0
 color_model_path = "./output/csv/1442865660962013184.csv"
-module = [subject.canvas, subject.cattle,stickers.hairman]
+module = [subject.canvas, subject.cattle]
 n = 10  #生成数量
 color_output_name = 'cattle' #文件夹名字
 color_style = 1 #0为随机风格，1为艺术家风格，2为固定风格
 k = 30  # K-Means算法分成K类
 init_method = 'random'
 random_state = 88
+train = False
  # 艺术家风格分箱颜色数
