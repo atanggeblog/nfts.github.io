@@ -7,7 +7,7 @@
 =================================================="""
 import csv
 import os
-from settings import DATACENTER_ID,WORKER_ID,SEQUENCE
+from settings import DATACENTER_ID,WORKER_ID,SEQUENCE,color_distance
 from colors import ColorMultiImage
 import numpy as np
 from function.snowflake import IdWorker
@@ -26,8 +26,8 @@ def training(color_data_path):
 
     color_data_sort = sorted(color_data_distance, key=lambda x: x[3])
     color_data_sort = np.array(color_data_sort)
-    color_data_sort_index = (color_data_sort[:, 3] > 300)
+    color_data_sort_index = (color_data_sort[:, 3] > color_distance)
     color_data_sort = color_data_sort[color_data_sort_index]
-    for rbg in color_data:
+    for rbg in color_data_sort:
         writer.writerow(tuple(rbg))
     return color_distance_filepath
