@@ -58,7 +58,6 @@ class ColorMultiImage(object):
                 continue
             img_data = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             r, g, _ = cv2.split(img_data)
-            # 行*列和颜色通道数（因RGB而为3个）
             img = img.reshape((img_data.shape[0] * img_data.shape[1], 3))
             print("加载" + filename + "中......")
             model = KMeans(n_clusters=self.k, init=self.init_method, random_state=self.random_state)
@@ -120,19 +119,12 @@ class ColorMultiImage(object):
             colors = ['000000'] + [self.random_colors() for i in range(0,colors_number)] #随机颜色
         if coloring_style == 1:
             colors = ['000000'] + self.get_color_data(color_distance_filepath,colors_number)  # 艺术家风格
-        if coloring_style == 2:
-            colors = ['000000'] + image_data['colors'][1:] # 固定风格
         for color in colors:
             color = [int(c, 16) for c in (color[:2], color[2:4], color[4:])]
             palette.append(tuple(color))
-        pixel_picture_file = png.Writer(len(canvas['data'][0]), len(
-            canvas['data']), palette=palette, bitdepth=4)
+        image = np.asarray([palette[np.asarray(image_data['data']).flatten()[x]] for x in range(0,len(np.asarray(image_data['data']).flatten()))]).flatten().reshape((24,24,3))
         dirs = os.getcwd() + "\\output\\" + str(name) + "-output\\"
         if not os.path.exists(dirs):
             os.makedirs(dirs)
-        pixel_picture = open(dirs + name + number + ".png", 'wb')
-        pixel_picture_file.write(pixel_picture, image_data['data'])
-        pixel_picture.close()
-        image = Image.open(dirs + name + number + ".png")
-        img_resize = image.resize((2500,2500),PIL.Image.NEAREST)
-        img_resize.save(dirs + name + number + ".png")
+        image = cv2.resize(image,(2500,2500),interpolation=cv2.INTER_NEAREST)
+        cv2.imwrite(dirs + name + number + ".png",image)
